@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 import java.util.Random;
 
@@ -53,8 +54,10 @@ public class Main {
             else {
                 System.out.println("Game Over");
         }
+        int healing_Salves = 3;
+
         while (my_Hp > 0 ){
-            System.out.println("0 to attack, 1 to heal");
+            System.out.println("0 to attack, 1 to heal. You only have " +  healing_Salves + " Healing Salves");
             System.out.println("Whats is your next action ?");
                 Scanner move_Choice =  new Scanner(System.in);
                 int value2 = move_Choice.nextInt();
@@ -64,16 +67,28 @@ public class Main {
                     Rosh.setHp(Rosh_tmp_health);
                     if (Rosh.getHp() <= 0) {
                         System.out.println(" You won!!!!!!!!!!!!");
+                        System.out.println(green + " has overcame the powers of Roshan");
+
+                        System.out.println();
                         break;
                     }
-                 else if (value2 == 1 ){
-                        System.out.println("You have chosen to heal 86 points");
-                        //Work to be done to recalibrate potions, superpotions, megapotions
-                        my_Hp += 86;
                     }
-                    else {System.out.println("You didn't know what to do. GG.");}
 
-                }
+                 else if (value2 == 1 ){
+                        if (healing_Salves > 0)
+                            {
+                                System.out.println("You have chosen to heal 120 points");
+                                //Work to be done to recalibrate potions, superpotions, megapotions
+                                my_Hp += 120;
+                                System.out.println("You have healed 120 points ");
+                                healing_Salves = healing_Salves - 1;
+                            }
+                        else {
+                                System.out.println("You have no Healing Salves, so you have no healed yourself ");
+                            }
+                    }
+
+
                 // ROsh's turn
                 System.out.println("Roshan is gonna attack you with " + Rosh.getAtt() + " Attack Points");
                 my_Hp = my_Hp - ramdom_Attack_Number(Rosh.getAtt()-20,Rosh.getAtt()+20 );
